@@ -80,7 +80,7 @@ class LocalRom(object):
             raise RuntimeError('Provided Base Rom unsuitable for patching. Please provide a JAP(1.0) "Zelda no Densetsu - Kamigami no Triforce (Japan).sfc" rom to use as a base.')
 
     def write_crc(self):
-        crc = (sum(self.buffer[:0x7FDC] + self.buffer[0x7FE0:]) + 0x01FE) & 0xFFFF
+        crc = (sum(self.buffer[:0x7FDC] + self.buffer[0x7FE0:])) & 0xFFFF
         inv = crc ^ 0xFFFF
         self.write_bytes(0x7FDC, [inv & 0xFF, (inv >> 8) & 0xFF, crc & 0xFF, (crc >> 8) & 0xFF])
 
